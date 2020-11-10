@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const celebrateErrors = require('celebrate').errors;
 const vault = require('./src/modules/vault');
 const routes = require('./src/routes');
 const db = require('./src/resources/database');
@@ -14,5 +15,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
+app.use(celebrateErrors());
 
 app.listen(vault.getSecret('PORT'));
