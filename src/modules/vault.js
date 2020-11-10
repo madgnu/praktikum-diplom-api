@@ -5,7 +5,7 @@ const { SecretNotFoundError } = require('../types/errors');
 const secrets = process.env;
 
 const devDefaults = {
-  MONGODB_URI: 'mongodb://localhost:27017/diploma',
+  DB_URI: 'mongodb://localhost:27017/diploma',
   PORT: 3000,
   AUTH_STRATEGY: 'bearer',
   JWT_SECRET: 'non-secret',

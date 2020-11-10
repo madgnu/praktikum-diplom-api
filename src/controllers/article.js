@@ -1,8 +1,9 @@
 const { Article } = require('../models/database');
+const { ForbiddenError } = require('../types/errors');
 
 module.exports.createArticle = async (req, res, next) => {
   try {
-    const article = await Article.create(req.body);
+    const article = await Article.create({ ...req.body, owner: req.user._id });
     res.send(article);
   } catch (err) {
     next(err);
@@ -11,8 +12,8 @@ module.exports.createArticle = async (req, res, next) => {
 
 module.exports.deleteArticle = async (req, res, next) => {
   try {
-    const { articleId } = req.params;
-    const article = await Article.findById(articleId).orFail();
+    const article = await Article.findById(req.params.articleId).orFail();
+    if (String(article.owner) !== req.user._id) throw new ForbiddenError('Owner mismatch');
     await article.deleteOne();
     res.send(article);
   } catch (err) {
@@ -22,7 +23,7 @@ module.exports.deleteArticle = async (req, res, next) => {
 
 module.exports.getArticles = async (req, res, next) => {
   try {
-    const articles = await Article.find({});
+    const articles = await Article.find({ owner: req.user._id });
     res.send(articles);
   } catch (err) {
     next(err);
