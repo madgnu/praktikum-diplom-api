@@ -4,7 +4,9 @@
   "description": "Diploma project (backend part) @ ya.praktikum web course",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=dev nodemon app.js --inspect",
+    "start": "NODE_ENV=production pm2-runtime app.js",
+    "test": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/madgnu/praktikum-diplom-api/issues"
   },
-  "homepage": "https://github.com/madgnu/praktikum-diplom-api#readme"
+  "homepage": "https://github.com/madgnu/praktikum-diplom-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pm2": "^4.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  }
 }
