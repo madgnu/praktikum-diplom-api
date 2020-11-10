@@ -9,6 +9,10 @@ const devDefaults = {
   PORT: 3000,
   AUTH_STRATEGY: 'bearer',
   JWT_SECRET: 'non-secret',
+  LOGS_FORMAT: 'json',
+  LOGS_TYPE: 'file',
+  LOGS_DIR: 'logs',
+  REQ_PER_MIN: 100,
 };
 
 module.exports.init = () => !vaultConfigured.error || (process.env.NODE_ENV !== 'production');
