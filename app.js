@@ -1,12 +1,15 @@
-const e = require('express');
 const express = require('express');
+const routes = require('./src/routes');
+const db = require('./src/resources/database');
 
 const {
   PORT = 3000,
+  DB_URI = 'mongodb://localhost:27017/diploma',
 } = process.env;
 
-const app = express();
+db.connect(DB_URI, () => console.log('db connected'));
 
-app.get('/', (req, res) => res.send('OK'));
+const app = express();
+app.use(routes);
 
 app.listen(PORT);
