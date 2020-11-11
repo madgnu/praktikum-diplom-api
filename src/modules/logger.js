@@ -5,11 +5,12 @@ const getFormater = (format) => {
   switch (format) {
     case 'json': return winston.format.json();
     case 'short': return winston.format.printf((info) => `${new Date().toISOString()} ${info.message}`);
+    case 'logstash': return winston.format.logstash();
     default: return winston.format.json();
   }
 };
 
-const getTransport = (transportType, filename = 'combine.log', dirname = 'log') => {
+const getTransport = (transportType, filename = 'combine.log', dirname = 'logs') => {
   switch (transportType) {
     case 'tty': return new winston.transports.Console();
     case 'file': return new winston.transports.File({ filename, dirname });

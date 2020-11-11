@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const cors = require('cors');
-const celebrateErrors = require('celebrate').errors;
 const vault = require('./src/modules/vault');
 const createLogger = require('./src/modules/logger');
 const routes = require('./src/routes');
@@ -14,7 +13,7 @@ const rateLimit = require('./src/middlewares/ratelimit');
 if (!vault.init()) {
   // Тут наши полномочия все, мы в проде и не сконфигурированы
   const errLogger = createLogger();
-  errLogger.error('Vault not configured, process exists');
+  errLogger.error('Vault not configured');
   process.exit(-1);
 }
 
@@ -51,7 +50,6 @@ app.use(cors({
   credentials: true,
 }));
 app.use(routes);
-app.use(celebrateErrors());
 app.use(createLogger({
   ...loggerOptions,
   loggerType: 'middlewareErrorLogger',

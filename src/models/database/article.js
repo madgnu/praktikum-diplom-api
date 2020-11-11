@@ -20,7 +20,6 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    // TO-DO: Уточнить
     type: String,
     required: true,
   },
