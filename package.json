@@ -1,6 +1,6 @@
 {
   "name": "praktikum-diploma-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Diploma project (backend part) @ ya.praktikum web course",
   "main": "app.js",
   "scripts": {
