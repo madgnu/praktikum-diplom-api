@@ -9,34 +9,37 @@ const getFormater = (format) => {
   }
 };
 
-const getTransport = (transportType, filename, dirname) => {
+const getTransport = (transportType, filename = 'combine.log', dirname = 'log') => {
   switch (transportType) {
     case 'tty': return new winston.transports.Console();
     case 'file': return new winston.transports.File({ filename, dirname });
-    default: return new winston.transports.File({ filename: 'request.log', dirname: 'logs' });
+    default: return new winston.transports.Console();
   }
 };
 
 const getLogger = (loggerType) => {
   switch (loggerType) {
-    case 'log': return expressWinston.logger;
-    case 'error': return expressWinston.errorLogger;
-    default: return expressWinston.logger;
+    case 'middlewareLogger': return expressWinston.logger;
+    case 'middlewareErrorLogger': return expressWinston.errorLogger;
+    case 'logger': return winston.createLogger;
+    default: return winston.createLogger;
   }
 };
 
 module.exports = (options = {}) => {
   const {
-    loggerType = 'log',
-    format = 'json',
-    transportType = 'file',
-    filename = 'combine.log',
-    dirname = 'logs',
+    loggerType,
+    format,
+    transportType,
+    filename,
+    dirname,
+    level = (process.env.NODE_ENV === 'production') ? 'error' : 'info',
   } = options;
 
   const logger = getLogger(loggerType);
 
   return logger({
+    level,
     transports: [getTransport(transportType, filename, dirname)],
     format: getFormater(format),
     expressFormat: format === 'short',
