@@ -6,8 +6,8 @@
 
 ## Как достучаться
 
-* [http://praktikum-diploma-api.madg.nu](http)
-* [https://praktikum-diploma-api.madg.nu](https)
+* [http](http://praktikum-diploma-api.madg.nu)
+* [https](https://praktikum-diploma-api.madg.nu)
 
 ## Как развернуть
 
