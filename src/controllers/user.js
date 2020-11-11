@@ -35,7 +35,7 @@ module.exports.authenticate = async (req, res, next) => {
 
 module.exports.getMe = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id).orFail();
     res.send(user);
   } catch (err) {
     next(err);
