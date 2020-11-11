@@ -4,8 +4,8 @@
   "description": "Diploma project (backend part) @ ya.praktikum web course",
   "main": "app.js",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon app.js --inspect",
-    "start": "NODE_ENV=production pm2-runtime app.js",
+    "dev": "cross-env NODE_ENV=dev nodemon app.js --inspect",
+    "start": "cross-env NODE_ENV=production pm2-runtime app.js",
     "build:cq": "docker run -it --rm --env CODECLIMATE_CODE=\"$PWD\" -v \"$PWD\":/code -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/cc:/tmp/cc codeclimate/codeclimate analyze -f html > code-quality.html",
     "build:image": "docker build -t diploma-api:latest .",
     "cq:install": "docker run -it --rm --env CODECLIMATE_CODE=\"$PWD\" -v \"$PWD\":/code -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/cc:/tmp/cc codeclimate/codeclimate engines:install",
@@ -28,6 +28,7 @@
     "celebrate": "^13.0.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.1.3",
